@@ -9,13 +9,14 @@ using System.IO.Pipes;
 namespace CompoundingKernel {
     class Kernel {
         static void Main(string[] args) {
+            
             // Create the server named pipe and tell it to wait for a connection
             NamedPipeServerStream npssServer = new NamedPipeServerStream("CompoundingKernel");
             npssServer.WaitForConnection();
             // Send a list of the methods we can handle to the UI
             MessageUtils.SendMsg(npssServer, "methods", "Annual,Monthly,Continuous");
             // Receive and process messages
-            vProcessMsgs(npssServer);
+            Task.Run(() => vProcessMsgs(npssServer)).Wait();
         }
 
         private static void vProcessMsgs(NamedPipeServerStream npssServer)

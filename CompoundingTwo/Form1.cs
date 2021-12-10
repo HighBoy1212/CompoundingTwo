@@ -29,6 +29,7 @@ namespace CompoundingTwo {
             // Create a process to run the kernel and start it
             Process pKernel = new Process();
             pKernel.StartInfo.FileName = "CompoundingKernel.exe";
+            pKernel.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pKernel.Start();
             // Wait for .5 seconds to allow the kernel to get started
             Thread.Sleep(500);
